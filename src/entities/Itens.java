@@ -16,7 +16,7 @@ public class Itens {
 	}
 	
 	public String toString() {
-		return this.produto.getNome()+", R$ "+this.preco+", quantidade:"+this.quantidade+", Subtotal: "+subTotal();
+		return this.produto.getNome()+", R$ "+String.format("%.2f",this.preco)+", Quantidade:"+this.quantidade+", Subtotal: R$"+String.format("%.2f",subTotal());
 	}
 	
 	public Double subTotal() {

@@ -11,6 +11,7 @@ public class Pedido {
 	private StatusPedido status;
 	private List <Itens> itens = new ArrayList<>();
 	private Cliente cliente;
+	private Double precoTotal=0.00;
 	
 	public Pedido() {
 		
@@ -44,8 +45,10 @@ public class Pedido {
 	
 	public void getItens() {
 		for(Itens x: itens) {
-			
+			System.out.println(x.toString());
+			this.precoTotal += x.subTotal();
 		}
+		System.out.println("Preço total: R$ "+String.format("%.2f",this.precoTotal));
 	}
 	
 	public void addItens(Itens iten) {

@@ -20,13 +20,14 @@ public class Programa {
 		System.out.print("Email:");
 		String emailCliente = sc.nextLine();
 		System.out.println("Data de nascimento (DD/MM/YYYY):");
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		try {
-			Date dataNascimCliente = sdf.parse(sc.nextLine());
+			Date dataNascimCliente = sdf1.parse(sc.nextLine());
 			System.out.println("Dados do pedido:");
 			System.out.print("Status:");
 			StatusPedido status = StatusPedido.valueOf(sc.nextLine().toUpperCase());
-			Pedido pedido = new Pedido(new Date(),status,nomeCliente,emailCliente,dataNascimCliente);
+			Pedido pedido = new Pedido(new Date(System.currentTimeMillis()),status,nomeCliente,emailCliente,dataNascimCliente);
 			System.out.println("Quantidade de itens?:");
 			int i = sc.nextInt();
 			for (int aux =0; aux<i;aux++) {
@@ -41,10 +42,11 @@ public class Programa {
 				Itens iten = new Itens(quantidade, preco, nomeProduto);
 				pedido.addItens(iten);
 			}
+			System.out.println("");
 			System.out.println("Resumo do pedido:");
-			System.out.println("Data do pedido: "+pedido.getData());
+			System.out.println("Data do pedido: "+sdf1.format(pedido.getData()));
 			System.out.println("Status do pedido: "+pedido.getStatus());
-			System.out.println("Cliente: "+pedido.getCliente().getNome()+" ("+pedido.getCliente().getData()+") - "+pedido.getCliente().getEmail());
+			System.out.println("Cliente: "+pedido.getCliente().getNome()+" ("+sdf2.format(pedido.getCliente().getData())+") - "+pedido.getCliente().getEmail());
 			System.out.println("Itens:");
 			pedido.getItens();
 		} catch (ParseException e) {
